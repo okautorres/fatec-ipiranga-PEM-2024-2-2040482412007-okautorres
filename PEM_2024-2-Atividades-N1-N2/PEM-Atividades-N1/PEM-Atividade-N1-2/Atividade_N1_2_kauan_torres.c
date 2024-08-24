@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
-Fatec Ipiranga - ADS Vespertino 2 Semestre
-Disciplina: Programação Estruturada e Modular 
-Kauan Torres
-*/
+/*----------------------------------------------------------------------------------*
+* Disciplina: Programaçao Estruturada e Modular *
+*          Prof. Carlos Veríssimo                                                   *
+*-----------------------------------------------------------------------------------*
+* Objetivo do Programa: Programa em C para receber as notas praticando vetores      *
+* Data - 23/08/2024                                                                 * 
+* Autor: Kauan Torres                                                               *
+*-----------------------------------------------------------------------------------*/
 
 float processoNotas(float *notas, int Nnotas, const char *bateria) { //Função para processar as notas, excluindo as notas dos extremos, somando as centrais.
 	
