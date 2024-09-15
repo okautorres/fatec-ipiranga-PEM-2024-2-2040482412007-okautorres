@@ -4,7 +4,7 @@
 *---------------------------------------------------------*
 * Objetivo do Programa: Calculadora HP12c                 *
 * Data : 15/09/2024                                       * 
-* Autor: Kauan Torres, Lucas Borges                       *
+* Autor: Kauan Torres, Lucas Borges, Lucas Marum          *
 *--------------------------------------------------------*/
 
 #include <stdio.h>
