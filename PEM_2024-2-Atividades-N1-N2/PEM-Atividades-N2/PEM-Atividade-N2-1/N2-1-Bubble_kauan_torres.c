@@ -6,8 +6,8 @@
 *          Prof. Carlos Veríssimo                         *                                
 *---------------------------------------------------------*
 * Objetivo do Programa: Bubble Sort em C                  *
-* Data : 27/09/2024                                       * 
-* Autor: Kauan Torres                                     *
+* Data : 04/10/2024                                       * 
+* Autor: Kauan Torres e Lucas Borges                      *
 *--------------------------------------------------------*/
 
 /*---------------------------------------------------------*
@@ -20,10 +20,16 @@
 //4. Definição de um nome de mais fácil entendimento das variavéis 
 //5. Utilização de ponteiros
 
+/*----------------------------------------------------------------------------------------------------*
+| Declaração antecipada das funções (estava dando erro se não declarasse antes                       |
+*----------------------------------------------------------------------------------------------------*/
+void printArray(int array[], int size);
+void bubbleSort(int array[], int n);
+void change(int *xp, int *yp);
+
 /*---------------------------------------------------------*
 | Módulo - Printar o array                                 |
 *---------------------------------------------------------*/
-
 void printArray(int array[], int size) {
 	int i;
     for (i = 0; i < size; i++)
@@ -34,11 +40,10 @@ void printArray(int array[], int size) {
 /*---------------------------------------------------------*
 | Módulo - Realizar o BubbleSort                           |
 *---------------------------------------------------------*/
-
 void bubbleSort(int array[], int n) {
-		int i,j;
+    int i, j;
     for (i = 0; i < n - 1; i++) {
-        for ( j = 0; j < n - i - 1; j++) {
+        for (j = 0; j < n - i - 1; j++) {
             if (array[j] > array[j + 1]) {
                 change(&array[j], &array[j + 1]);
             }
@@ -49,7 +54,6 @@ void bubbleSort(int array[], int n) {
 /*---------------------------------------------------------*
 | Módulo - Mudar posições                                  |
 *---------------------------------------------------------*/
-
 void change(int *xp, int *yp) {
     int temporary = *xp;
     *xp = *yp;
@@ -59,31 +63,29 @@ void change(int *xp, int *yp) {
 /*---------------------------------------------------------*
 | Módulo - Modulo principal                                |
 *---------------------------------------------------------*/
-
 int main() {
-    int n,i;
-    int array[n];
-    
-    printf("Quantos numeros deseja inserir ? ");
+    int n, i;
+
+    printf("Quantos numeros deseja inserir? ");
     scanf("%d", &n);
 
+    int array[n];
 
     printf("Insira %d numeros:\n", n);
-    for ( i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         printf("Numero %d: ", i + 1);
         scanf("%d", &array[i]);
     }
 
     printf("Array original: ");
-    //Chama modulo para printar array
+    // Chama modulo para printar array
     printArray(array, n);
 
-    //Chama modulo para realizar o bubbleSort
+    // Chama modulo para realizar o bubbleSort
     bubbleSort(array, n);
 
-    
     printf("Array ordenado: ");
-    //Chama modulo para printar array
+    // Chama modulo para printar array
     printArray(array, n);
 
     return 0;
