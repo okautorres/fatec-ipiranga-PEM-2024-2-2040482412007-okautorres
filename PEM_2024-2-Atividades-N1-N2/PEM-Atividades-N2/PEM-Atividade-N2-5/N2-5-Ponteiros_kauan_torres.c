@@ -13,7 +13,7 @@
 *------------------------------------------------------------*/
 
  
-typedef struct {
+typedef struct { //Definição do Struct
     int ID;
     char nome[50];
     int qtEstoque;
@@ -22,13 +22,13 @@ typedef struct {
 
 
 /*---------------------------------------------------------*
-| Módulo - Inserir produto                                 |
+| M?dulo - Inserir produto                                 |
 *---------------------------------------------------------*/
 
 void inserirProduto(int *contador, Produto *produtos){
      int ID;
      
-     ID = *contador + 1;
+     ID = *contador + 1; //ID do produto sempre será contador +1, auto-incremento.
      produtos[ID].ID = ID;
      
     printf("================================================== \n");
@@ -40,15 +40,20 @@ void inserirProduto(int *contador, Produto *produtos){
     scanf("%lf", &produtos[ID].valor);
     
     
-    *contador = *contador + 1;
+    *contador = *contador + 1; //Depois que o produto é inserido, acrescenta 1 no contador.
     
-    printf("Produto inserido corretamente. \n ");
+    printf("Produto inserido corretamente.\n ");
+    printf("================================================== \n");
+    printf("ID: %i\n", produtos[ID].ID);
+    printf("Nome: %s", produtos[ID].nome);
+    printf("Quantidade no estoque: %i\n", produtos[ID].qtEstoque);
+    printf("Valor: %.2lf\n \n", produtos[ID].valor);
     
      getchar();     
 }
 
 /*---------------------------------------------------------*
-| Módulo - Modulo consulta geral                           |
+| M?dulo - Modulo consulta geral                           |
 *---------------------------------------------------------*/
 
 void consultaGeral(int contador, Produto *produtos) {
@@ -70,13 +75,14 @@ void consultaGeral(int contador, Produto *produtos) {
 }
 
 /*---------------------------------------------------------*
-| Módulo - Modulo consulta produto                         |
+| M?dulo - Modulo consulta produto                         |
 *---------------------------------------------------------*/
 
 void consultarProduto(int contador, Produto *produtos) {
      int ID;
      printf("Digite o ID do produto a ser consultado: \n");
      scanf("%i",&ID);
+    printf("================================================== \n");
      if (ID > contador || ID == 0) {
         printf("Este produto nao existe. \n");
         return;
@@ -89,7 +95,7 @@ void consultarProduto(int contador, Produto *produtos) {
 }
 
 /*---------------------------------------------------------*
-| Módulo - Modulo alterar  produto                         |
+| M?dulo - Modulo alterar  produto                         |
 *---------------------------------------------------------*/
 
 void alterarProduto(int contador, Produto *produtos){
@@ -138,18 +144,18 @@ void alterarProduto(int contador, Produto *produtos){
 
 
 /*---------------------------------------------------------*
-| Módulo - Modulo excluir  produto                         |
+| M?dulo - Modulo excluir  produto                         |
 *---------------------------------------------------------*/
 
 void excluirProduto(int *contador, Produto *produtos){
-    int ID, resposta;
+    int ID, resposta, i;
      printf("   ================================================== \n");
      printf("Digite o codigo do produto que deseja excluir: \n");
      scanf("%i",&ID);
      
      getchar();
      
-     if (ID > *contador || ID == 0) {
+     if (ID > *contador || ID == 0 || produtos[ID].ID == 0) {
         printf("Este produto nao existe. \n");
         return;
      }
@@ -163,19 +169,29 @@ void excluirProduto(int *contador, Produto *produtos){
      printf("Tem certeza que deseja excluir este item ? (1) - SIM | (2) - NAO \n");
      scanf("%i", &resposta);
      
-     if(resposta == 2){
+     if(resposta != 1){
+     	printf("A resposta seria somente (1) - SIM | (2) - NAO.\n");
      return;
      }
+
+    for(i = ID; i < *contador; i++) {
+        produtos[i] = produtos[i + 1]; //Aqui, basicamente fiz com que todos os produtos a direita do produto selecionado, voltem um ID. Para ocupar a vaga do ID selecionado.  
+        produtos[i].ID = i;  // Aqui o ID do anterior é colocado depois que houve a troca.
+    }
+    
+    produtos[*contador].ID = 0; //Anulo o produto final, pois o que sobra já foi trocado para a posição anterior
+    strcpy(produtos[*contador].nome, "");
+    produtos[*contador].qtEstoque = 0;
+    produtos[*contador].valor = 0;
      
-     produtos[ID] = produtos[ID - 1]; 
-     
+        
      (*contador)--;
      
      
 }
 
 /*---------------------------------------------------------*
-| Módulo - Modulo vender produto                           |
+| M?dulo - Modulo vender produto                           |
 *---------------------------------------------------------*/
 
 void venderProduto(int contador, Produto *produtos){
@@ -231,12 +247,13 @@ void venderProduto(int contador, Produto *produtos){
 
 
 /*---------------------------------------------------------*
-| Módulo - Modulo principal                                |
+| M?dulo - Modulo principal                                |
 *---------------------------------------------------------*/
 
 int main() {
     int opcao;
     int contador = 0;
+    int totalCadastros = 0;
     Produto produtos[50];
     
     do {
@@ -262,22 +279,22 @@ int main() {
        
         switch(opcao) {
             case 1:
-                inserirProduto(&contador, produtos); // Chama módulo inserção produto
+                inserirProduto(&contador, produtos); // Chama m?dulo inser??o produto
                 break;
             case 2:
-                consultarProduto(contador, produtos); // Chama módulo consulta produto
+                consultarProduto(contador, produtos); // Chama m?dulo consulta produto
                 break;
             case 3:
-                consultaGeral(contador, produtos); // Chama módulo consulta geral
+                consultaGeral(contador, produtos); // Chama m?dulo consulta geral
                 break;
             case 4:
-                 alterarProduto(contador, produtos);
+                 alterarProduto(contador, produtos); // Chama m?dulo alterar produto
                  break;
             case 5:
-                 excluirProduto(&contador, produtos);
+                 excluirProduto(&contador, produtos); // Chama m?dulo excluir produto
                  break;
              case 6:
-                  venderProduto(contador, produtos);
+                  venderProduto(contador, produtos); // Chama m?dulo vender produto
                  break;
         }
 
